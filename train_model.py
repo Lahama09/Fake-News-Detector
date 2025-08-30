@@ -1,45 +1,35 @@
 import pandas as pd
+from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import PassiveAggressiveClassifier
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-import pickle 
-import os
-
-os.makedirs("model", exist_ok=True)
-with open("model/model.pkl", "wb") as f:
-    pickle.dump(model, f)
+import pickle, os
 
 # Load dataset
 df = pd.read_csv("fake_news_dataset.csv")
 
-# Features and labels
-X = df['text']
-y = df['label']
+# Features & labels
+x = df["text"]
+y = df["label"]
 
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Split
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
-# Vectorize text
-vectorizer = TfidfVectorizer(stop_words='english', max_df=0.7)
-X_train_vec = vectorizer.fit_transform(X_train)
-X_test_vec = vectorizer.transform(X_test)
+# Vectorization
+tfidf = TfidfVectorizer(stop_words="english", max_df=0.7)
+x_train_tfidf = tfidf.fit_transform(x_train)
+x_test_tfidf = tfidf.transform(x_test)
 
-# Train model
-model = PassiveAggressiveClassifier(max_iter=50)
-model.fit(X_train_vec, y_train)
+# Train classifier
+classifier = PassiveAggressiveClassifier(max_iter=50)
+classifier.fit(x_train_tfidf, y_train)
 
-# Predict & Evaluate
-y_pred = model.predict(X_test_vec)
-score = accuracy_score(y_test, y_pred)
-print(f"Model Accuracy: {round(score*100, 2)}%")
+# Test accuracy
+y_pred = classifier.predict(x_test_tfidf)
+acc = accuracy_score(y_test, y_pred) * 100
+print(f"Model Accuracy: {acc:.2f}%")
 
-# Save model and vectorizer
+# ✅ Save both vectorizer and model
+os.makedirs("model", exist_ok=True)
 with open("model/model.pkl", "wb") as f:
-    pickle.dump(model, f)
-
-with open("model/vectorizer.pkl", "wb") as f:
-    pickle.dump(vectorizer, f)
-
-print("✅ Model and vectorizer saved successfully!")
-
+    pickle.dump((tfidf, classifier), f)
