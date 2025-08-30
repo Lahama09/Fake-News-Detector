@@ -3,7 +3,12 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-import pickle
+import pickle 
+import os
+
+os.makedirs("model", exist_ok=True)
+with open("model/model.pkl", "wb") as f:
+    pickle.dump(model, f)
 
 # Load dataset
 df = pd.read_csv("fake_news_dataset.csv")
