@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake News Detector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📰 Fake News Detector</h1>
+        <form method="POST" action="/predict">
+            <textarea name="news" placeholder="Enter news text here..." required>{{ news if news else "" }}</textarea>
+            <br>
+            <button type="submit">Check</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h2>Result: {{ prediction }}</h2>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
