@@ -1,32 +1,40 @@
-# train_model.py
 import pandas as pd
-import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import pickle
 
-# 1. Load dataset
-# Replace this with your dataset CSV file
-df = pd.read_csv("fake_news_dataset.csv")  
-X = df["text"]
-y = df["label"]
+# Load dataset
+df = pd.read_csv("fake_news_dataset.csv")
 
-# 2. Convert text into numerical features
-vectorizer = TfidfVectorizer(stop_words="english", max_df=0.7)
-X_vec = vectorizer.fit_transform(X)
+# Features and labels
+X = df['text']
+y = df['label']
 
-# 3. Split into train and test
-X_train, X_test, y_train, y_test = train_test_split(X_vec, y, test_size=0.2, random_state=42)
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# 4. Train model
-model = LogisticRegression()
-model.fit(X_train, y_train)
+# Vectorize text
+vectorizer = TfidfVectorizer(stop_words='english', max_df=0.7)
+X_train_vec = vectorizer.fit_transform(X_train)
+X_test_vec = vectorizer.transform(X_test)
 
-# 5. Save model and vectorizer
-with open("model/fake_news_model.pkl", "wb") as f:
+# Train model
+model = PassiveAggressiveClassifier(max_iter=50)
+model.fit(X_train_vec, y_train)
+
+# Predict & Evaluate
+y_pred = model.predict(X_test_vec)
+score = accuracy_score(y_test, y_pred)
+print(f"Model Accuracy: {round(score*100, 2)}%")
+
+# Save model and vectorizer
+with open("model/model.pkl", "wb") as f:
     pickle.dump(model, f)
 
 with open("model/vectorizer.pkl", "wb") as f:
     pickle.dump(vectorizer, f)
 
-print("✅ Model and vectorizer saved in 'model/' folder")
+print("✅ Model and vectorizer saved successfully!")
+
