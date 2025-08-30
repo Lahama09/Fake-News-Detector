@@ -2,23 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fake News Detector</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>📰 Fake News Detector</h1>
-        <form method="POST" action="/predict">
-            <textarea name="news" placeholder="Enter news text here..." required>{{ news if news else "" }}</textarea>
-            <br>
-            <button type="submit">Check</button>
+        <h1>📰 Fake News Detection</h1>
+
+        <form id="newsForm">
+            <textarea id="newsInput" placeholder="Paste news text here..." rows="6"></textarea>
+            <button type="submit">Check News</button>
         </form>
 
-        {% if prediction %}
-        <div class="result">
-            <h2>Result: {{ prediction }}</h2>
-        </div>
-        {% endif %}
+        <div id="result"></div>
     </div>
+<script src= "script.js"></script>
 </body>
 </html>
