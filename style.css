@@ -1,43 +1,65 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #0a9398;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0a9398, #005f73);
     text-align: center;
     padding: 50px;
+    color: #333;
+
 }
 
 .container {
-    background: #60f0e6eb;
-    padding: 100px;
-    border-radius: 100px;
-    width: 50%;
+    background: #ffffffcc;
+    padding: 40px;
+    border-radius: 16px;
+    width: 60%;
+    max-width: 600px;
     margin: auto;
-    box-shadow: 0 0 10px rgba(7, 7, 7, 0.544);
+    box-shadow: 0 8 20px rgba(0, 0, 0, 0.15);
 }
 
 textarea {
-    width: 80%;
+    width: 100%;
     height: 150px;
-    margin: 10px 0;
-    padding: 40px;
+    margin: 15px 0;
+    padding: 15px;
     font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    transition: border-color 0.3s
+}
+textarea:focus {
+    border-color: #0a9398;
+    outline: none;
 }
 
 button {
-    padding: 10px 20px;
-    background: #2ac320;
-    border: black;
-    color: rgb(250, 250, 250);
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #2ac320, #1a7d12);
+    border: none;
+    color: #fff;
     font-size: 16px;
-    border-radius: 5px;
+    font-weight: bold;
+    border-radius: 8px;
     cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+
 }
 
 button:hover {
-    background: #023010;
+    background: linear-gradient(135deg, #1a7d12, #023010);
+    transform: scale(1.05);
+
 }
 
 .result {
     margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
+    animation: fadeIn 0.5s ease-in-out;
+
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

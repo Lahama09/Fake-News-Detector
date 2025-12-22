@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("newsForm");
     const inputField = document.getElementById("newsInput");
     const resultDiv = document.getElementById("result");
+    const toggleBtn = document.getElementById("toggleTheme"); 
 
+    // --- Form submission handler ---
     form.addEventListener("submit", async function (e) {
         e.preventDefault(); // prevent page reload
 
@@ -39,4 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error:", error);
         }
     });
+
+    // --- Dark mode toggle handler ---
+    if (toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+        });
+    }
 });
