@@ -1,14 +1,11 @@
-// static/script.js
-
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("newsForm");
     const inputField = document.getElementById("newsInput");
     const resultDiv = document.getElementById("result");
-    const toggleBtn = document.getElementById("toggleTheme"); 
+    const toggleBtn = document.getElementById("toggleTheme");
 
-    // --- Form submission handler ---
     form.addEventListener("submit", async function (e) {
-        e.preventDefault(); // prevent page reload
+        e.preventDefault();
 
         const newsText = inputField.value.trim();
         if (!newsText) {
@@ -21,9 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await fetch("/predict", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ text: newsText })
             });
 
@@ -42,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // --- Dark mode toggle handler ---
     if (toggleBtn) {
         toggleBtn.addEventListener("click", () => {
             document.body.classList.toggle("dark-mode");
