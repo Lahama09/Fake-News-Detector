@@ -1,4 +1,4 @@
-        news = request.form["news"]
+        news = request.form["newsInput"]
 
         # Transform input
         vect = vectorizer.transform([news])
