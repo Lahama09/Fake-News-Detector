@@ -42,4 +42,9 @@ document.addEventListener("DOMContentLoaded", function () {
             document.body.classList.toggle("dark-mode");
         });
     }
+    const textarea = document.getElementById("newsInput");
+textarea.addEventListener("input", () => {
+    textarea.style.height = "auto";        // reset
+    textarea.style.height = textarea.scrollHeight + "px"; // expand
+});
 });
