@@ -1,18 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("newsForm");
     const inputField = document.getElementById("newsInput");
     const resultDiv = document.getElementById("result");
-    const toggleBtn = document.getElementById("toggleTheme");
 
-    form.addEventListener("submit", async function (e) {
-        e.preventDefault();
-
+    // Classify text
+    document.getElementById("classifyBtn").addEventListener("click", async () => {
         const newsText = inputField.value.trim();
         if (!newsText) {
             resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please enter some text.</p>";
             return;
         }
-
         resultDiv.innerHTML = "<p>⏳ Analyzing...</p>";
 
         try {
@@ -21,9 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ text: newsText })
             });
-
             const data = await response.json();
-
             if (data.prediction === "FAKE") {
                 resultDiv.innerHTML = "<p style='color:red; font-weight:bold;'>❌ Fake News Detected!</p>";
             } else if (data.prediction === "REAL") {
@@ -37,19 +31,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    if (toggleBtn) {
-        toggleBtn.addEventListener("click", () => {
-            document.body.classList.toggle("dark-mode");
-        });
-    }
-    const textarea = document.getElementById("newsInput");
-textarea.addEventListener("input", () => {
-    textarea.style.height = "auto";        // reset
-    textarea.style.height = textarea.scrollHeight + "px"; // expand
-});
-// Auto-refresh page when CSS/JS changes
-setInterval(() => {
-    fetch("/static/style.css", {cache: "no-store"})
-        .then(() => location.reload());
-}, 5000); // checks every 5 seconds
+    // Fetch live news
+    document.getElementById("fetchBtn").addEventListener("click", async () => {
+        const query = inputField.value.trim();
+        if (!query) {
+            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Please enter a keyword.</p>";
+            return;
+        }
+        resultDiv.innerHTML = "<p>⏳ Fetching news...</p>";
+
+        try {
+            const res = await fetch(`/get_news?q=${encodeURIComponent(query)}`);
+            const articles = await res.json();
+            resultDiv.innerHTML = "";
+            articles.forEach(a => {
+                resultDiv.innerHTML += `<p><a href="${a.url}" target="_blank">${a.title}</a> → ${a.prediction}</p>`;
+            });
+        } catch (error) {
+            resultDiv.innerHTML = "<p style='color:red;'>⚠️ Error: Could not fetch news.</p>";
+            console.error("Error:", error);
+        }
+    });
 });
