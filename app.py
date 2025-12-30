@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import pickle
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=".")
 
 # Load model + vectorizer
 with open("model/model.pkl", "rb") as f:
