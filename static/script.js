@@ -47,4 +47,9 @@ textarea.addEventListener("input", () => {
     textarea.style.height = "auto";        // reset
     textarea.style.height = textarea.scrollHeight + "px"; // expand
 });
+// Auto-refresh page when CSS/JS changes
+setInterval(() => {
+    fetch("/static/style.css", {cache: "no-store"})
+        .then(() => location.reload());
+}, 5000); // checks every 5 seconds
 });
