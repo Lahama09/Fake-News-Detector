@@ -34,6 +34,7 @@ textarea {
 textarea:focus {
     border-color: #0a9398;
     outline: none;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 button {
