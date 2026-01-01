@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import pickle
-
+import requests
 app = Flask(__name__, template_folder=".")
 
 API_KEY = "e9e9679fe3dc429ab8784f0793371dcb"
