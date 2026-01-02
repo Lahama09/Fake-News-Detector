@@ -54,7 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     const toggleBtn = document.getElementById("toggleTheme");
     toggleBtn.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
+     document.body.classList.toggle("dark-mode");
 });
+
+resultDiv.innerHTML += `<p><a href="${a.url}" target="_blank">${a.title}</a> → ${a.prediction}</p>`;
+
 
 });

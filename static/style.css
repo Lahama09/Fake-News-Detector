@@ -107,3 +107,14 @@ body.dark-mode .result {
     display: inline-block;
     transition: transform 0.3s, color 0.3s;
 }   
+.result a {
+    color: #ff00ff; /* neon magenta */
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.result a:hover {
+    color: #00ffff; /* cyan on hover */
+    text-shadow: 0 0 8px #00ffff;
+}
