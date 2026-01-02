@@ -118,3 +118,13 @@ body.dark-mode .result {
     color: #00ffff; /* cyan on hover */
     text-shadow: 0 0 8px #00ffff;
 }
+.fake-link {
+    color: #ff4444; /* red for fake */
+}
+.real-link {
+    color: #44ff44; /* green for real */
+}
+.title span:hover {
+    transform: scale(1.2) rotate(5deg);
+    color: #00ffff; /* neon cyan on hover */
+}
