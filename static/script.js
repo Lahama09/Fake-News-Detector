@@ -62,6 +62,4 @@ articles.forEach(a => {
     const cls = a.prediction === "FAKE" ? "fake-link" : "real-link";
     resultDiv.innerHTML += `<p><a href="${a.url}" target="_blank" class="${cls}">${a.title}</a> → ${a.prediction}</p>`;
 });
-
-
 });

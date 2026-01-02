@@ -106,25 +106,25 @@ body.dark-mode .result {
 .title span {
     display: inline-block;
     transition: transform 0.3s, color 0.3s;
-}   
-.result a {
+}  
+.title span:hover {
+    transform: scale(1.2) rotate(5deg);
+    color: #bd00ff; /* neon purple on hover */
+} 
+#result a {
     color: #ff00ff; /* neon magenta */
     font-weight: bold;
     text-decoration: none;
     transition: color 0.3s, text-shadow 0.3s;
 }
 
-.result a:hover {
+#result a:hover {
     color: #00ffff; /* cyan on hover */
     text-shadow: 0 0 8px #00ffff;
 }
-.fake-link {
+#result a.fake-link {
     color: #ff4444; /* red for fake */
 }
-.real-link {
+#result a.real-link {
     color: #44ff44; /* green for real */
-}
-.title span:hover {
-    transform: scale(1.2) rotate(5deg);
-    color: #00ffff; /* neon cyan on hover */
 }
